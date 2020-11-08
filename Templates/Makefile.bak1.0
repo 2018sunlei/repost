@@ -1,0 +1,31 @@
+#
+#
+# date : 10/27/2020
+
+
+ifndef	CCOMPILER
+	CCOMPILER := gcc
+endif
+
+#VPATH = include
+test = $(pwd)
+
+CC := $(CCOMPILER) 
+CFLAGS=-Wall 
+INC = -I./include 
+
+src = main.o 
+
+objects = $(src:.c=.o)
+target: $(objects)
+	$(CC) $(CFLAGS) $(INC)  -o target $(objects)
+	echo "$(test)"
+main.o: main.c 
+	$(CC) $(CFLAGS) $(INC)   -c -o $@ $^
+
+
+
+
+.PHONY:clean
+clean: 
+	-rm target $(objects)
